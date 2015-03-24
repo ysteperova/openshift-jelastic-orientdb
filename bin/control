@@ -32,9 +32,9 @@ stop() {
         echo "Stopping OrientDB server daemon..."
         cd $ORIENTDB_DIR/bin && /usr/bin/nohup ./shutdown.sh 1>>${OPENSHIFT_ORIENTDB_LOG_DIR}/orientdb.log 2>>${OPENSHIFT_ORIENTDB_LOG_DIR}/orientdb.err
 	sleep 1;
-	local varnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
+	local odbnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
   	[ -n "$odbproc" ] && kill -9 $odbproc > /dev/null 2>&1;
-  	local varnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
+  	local odbnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
   	[ -z "$odbproc" ] && { echo "Orientdb has been stopped successfully"; return 0; } || { echo "Orientdb hasn't been stopped"; return 1; }; 
 }
 
