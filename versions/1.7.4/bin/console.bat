@@ -1,6 +1,6 @@
 @echo off
 rem
-rem Copyright (c) 1999-2011 Luca Garulli @www.orientechnologies.com
+rem Copyright (c) Orient Technologies LTD (http://www.orientechnologies.com)
 rem
 rem Guess ORIENTDB_HOME if not defined
 set CURRENT_DIR=%cd%
@@ -44,7 +44,7 @@ set TRUSTSTORE=%ORIENTDB_HOME%\config\cert\orientdb-console.ts
 set TRUSTSTORE_PASS=password
 set SSL_OPTS="-Dclient.ssl.enabled=false -Djavax.net.ssl.keyStore=%KEYSTORE% -Djavax.net.ssl.keyStorePassword=%KEYSTORE_PASS% -Djavax.net.ssl.trustStore=%TRUSTSTORE% -Djavax.net.ssl.trustStorePassword=%TRUSTSTORE_PASS%"
 
-set ORIENTDB_SETTINGS=-Dcache.level1.enabled=false -Dcache.level2.enabled=false -Djava.util.logging.config.file="%ORIENTDB_HOME%\config\orientdb-client-log.properties" -Djava.awt.headless=true
-call %JAVA% -client %SSL_OPTS% %ORIENTDB_SETTINGS% -Dfile.encoding=utf-8 -Dorientdb.build.number="UNKNOWN@r${buildNumber}; 2014-06-23 19:29:10+0200" -cp "%ORIENTDB_HOME%\lib\*;" com.orientechnologies.orient.graph.console.OGremlinConsole %CMD_LINE_ARGS%
+set ORIENTDB_SETTINGS=-Xmx512m -Djava.util.logging.config.file="%ORIENTDB_HOME%\config\orientdb-client-log.properties" -Djava.awt.headless=true
+call %JAVA% -client %SSL_OPTS% %ORIENTDB_SETTINGS% -Dfile.encoding=utf-8 -Dorientdb.build.number="UNKNOWN@r${buildNumber}; 2015-03-12 22:59:10+0000" -cp "%ORIENTDB_HOME%\lib\*;%ORIENTDB_HOME%\plugins\*" com.orientechnologies.orient.graph.console.OGremlinConsole %CMD_LINE_ARGS%
 
 :end

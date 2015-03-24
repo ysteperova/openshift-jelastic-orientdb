@@ -1,10 +1,7 @@
 #!/bin/sh
 #
-# Copyright (c) 1999-2010 Luca Garulli
+# Copyright (c) Orient Technologies LTD (http://www.orientechnologies.com)
 #
-
-#set current working directory
-cd `dirname $0`
 
 # resolve links - $0 may be a softlink
 PRG="$0"
@@ -23,8 +20,9 @@ done
 PRGDIR=`dirname "$PRG"`
 
 # Only set ORIENTDB_HOME if not already set
-[ -f "$ORIENTDB_HOME"/lib/orientdb-tools-1.7.4.jar ] || ORIENTDB_HOME=`cd "$PRGDIR/.." ; pwd`
+[ -f "$ORIENTDB_HOME"/lib/orientdb-tools-2.0.5.jar ] || ORIENTDB_HOME=`cd "$PRGDIR/.." ; pwd`
 export ORIENTDB_HOME
+cd "$ORIENTDB_HOME/bin"
 
 # Set JavaHome if it exists
 if [ -f "${JAVA_HOME}/bin/java" ]; then 
@@ -34,12 +32,12 @@ else
 fi
 export JAVA
 
-ORIENTDB_SETTINGS="-Dcache.level1.enabled=false -Dcache.level2.enabled=false -Djava.util.logging.config.file="$ORIENTDB_HOME/config/orientdb-client-log.properties" -Djava.awt.headless=true"
+ORIENTDB_SETTINGS="-Djava.util.logging.config.file="$ORIENTDB_HOME/config/orientdb-client-log.properties" -Djava.awt.headless=true"
 #JAVA_OPTS=-Xmx1024m
 KEYSTORE=$ORIENTDB_HOME/config/cert/orientdb-console.ks
 KEYSTORE_PASS=password
 TRUSTSTORE=$ORIENTDB_HOME/config/cert/orientdb-console.ts
 TRUSTSTORE_PASS=password
-SSL_OPTS="-Dclient.ssl.enabled=false -Djavax.net.ssl.keyStore=$KEYSTORE -Djavax.net.ssl.keyStorePassword=$KEYSTORE_PASS -Djavax.net.ssl.trustStore=$TRUSTSTORE -Djavax.net.ssl.trustStorePassword=$TRUSTSTORE_PASS"
+SSL_OPTS="-Xmx512m -Dclient.ssl.enabled=false -Djavax.net.ssl.keyStore=$KEYSTORE -Djavax.net.ssl.keyStorePassword=$KEYSTORE_PASS -Djavax.net.ssl.trustStore=$TRUSTSTORE -Djavax.net.ssl.trustStorePassword=$TRUSTSTORE_PASS"
 
-$JAVA -client $JAVA_OPTS $ORIENTDB_SETTINGS $SSL_OPTS -Dfile.encoding=utf-8 -Dorientdb.build.number="UNKNOWN@r${buildNumber}; 2014-06-23 19:29:10+0200" -cp "$ORIENTDB_HOME/lib/orientdb-tools-1.7.4.jar:$ORIENTDB_HOME/lib/*" com.orientechnologies.orient.graph.console.OGremlinConsole $*
+"$JAVA" -client $JAVA_OPTS $ORIENTDB_SETTINGS $SSL_OPTS -Dfile.encoding=utf-8 -Dorientdb.build.number="UNKNOWN@r${buildNumber}; 2015-03-12 22:59:10+0000" -cp "$ORIENTDB_HOME/lib/orientdb-tools-2.0.5.jar:$ORIENTDB_HOME/lib/*:$ORIENTDB_HOME/plugins/*" com.orientechnologies.orient.graph.console.OGremlinConsole $*
