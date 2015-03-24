@@ -34,7 +34,7 @@ stop() {
 	sleep 1;
 	local odbnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
   	[ -n "$odbproc" ] && kill -9 $odbproc > /dev/null 2>&1;
-  	local odbnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
+  	odbnproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
   	[ -z "$odbproc" ] && { echo "Orientdb has been stopped successfully"; return 0; } || { echo "Orientdb hasn't been stopped"; return 1; }; 
 }
 
